@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keeranna Store - Premium</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- ================= NAVBAR ================= -->
+  <header id="navbar">
+    <div class="nav-logo">
+      <h1><i class="fas fa-store"></i> Keeranna Store</h1>
+    </div>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="#dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="#admin-panel"><i class="fas fa-tools"></i> Admin</a></li>
+        <li><a href="#billing-section"><i class="fas fa-receipt"></i> Billing</a></li>
+        <li><a href="#records-section"><i class="fas fa-folder"></i> Records</a></li>
+        <li><a href="#about-section"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="#contact-section"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a href="#faq-section"><i class="fas fa-question-circle"></i> FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button id="logout-btn" class="hidden"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </header>  <!-- ================= LOGIN PAGE ================= -->  <main id="login-page" class="page">
+    <section class="login-card">
+      <h2><i class="fas fa-user-lock"></i> Login to Keeranna Store</h2>
+      <form id="login-form" class="form">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" required>
+        </div>
+        <button type="submit" class="btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
+      </form>
+    </section>
+  </main>  <!-- ================= DASHBOARD ================= -->  <main id="dashboard" class="page hidden">
+    <section class="welcome-section">
+      <h2>Welcome, <span id="user-name">Admin</span> 👋</h2>
+      <p>Manage your store, track items, generate bills, and view customer records all in one place.</p>
+    </section><!-- Dashboard Cards -->
+<section class="dashboard-cards">
+  <div class="card">
+    <i class="fas fa-box"></i>
+    <h3>Total Items</h3>
+    <p id="total-items">0</p>
+  </div>
+  <div class="card">
+    <i class="fas fa-users"></i>
+    <h3>Total Customers</h3>
+    <p id="total-customers">0</p>
+  </div>
+  <div class="card">
+    <i class="fas fa-file-invoice"></i>
+    <h3>Total Bills</h3>
+    <p id="total-bills">0</p>
+  </div>
+  <div class="card">
+    <i class="fas fa-rupee-sign"></i>
+    <h3>Revenue</h3>
+    <p id="total-revenue">₹0</p>
+  </div>
+</section>
+
+<!-- Chart Section -->
+<section class="charts">
+  <h2>📊 Sales Overview</h2>
+  <canvas id="salesChart"></canvas>
+</section>
+
+<!-- Recent Activity -->
+<section class="recent-activity">
+  <h2>📰 Recent Activity</h2>
+  <ul>
+    <li>Item "Rice" updated - ₹60/kg</li>
+    <li>Bill generated for Buyer: Ramesh - ₹540</li>
+    <li>New Item added: Sugar - ₹45/kg</li>
+  </ul>
+</section>
+
+  </main>  <!-- ================= ADMIN PANEL ================= -->  <section id="admin-panel" class="page hidden">
+    <h2>🛠️ Admin Panel</h2>
+    <p>Add or update store items below.</p><form id="item-form" class="form">
+  <div class="form-group">
+    <label for="item-name">Item Name:</label>
+    <input type="text" id="item-name" required>
+  </div>
+  <div class="form-group">
+    <label for="item-price">Price per Kg (₹):</label>
+    <input type="number" id="item-price" required>
+  </div>
+  <button type="submit" class="btn-primary"><i class="fas fa-plus-circle"></i> Add / Update Item</button>
+</form>
+
+<div class="table-container">
+  <h3>Available Items</h3>
+  <table>
+    <thead>
+      <tr>
+        <th><i class="fas fa-cube"></i> Item</th>
+        <th><i class="fas fa-rupee-sign"></i> Price/Kg</th>
+        <th><i class="fas fa-cogs"></i> Actions</th>
+      </tr>
+    </thead>
+    <tbody id="items-table">
+      <tr><td>Rice</td><td>₹60</td><td><button>Edit</button> <button>Delete</button></td></tr>
+      <tr><td>Sugar</td><td>₹45</td><td><button>Edit</button> <button>Delete</button></td></tr>
+      <tr><td>Dal</td><td>₹80</td><td><button>Edit</button> <button>Delete</button></td></tr>
+    </tbody>
+  </table>
+</div>
+
+  </section>  <!-- ================= BILLING SECTION ================= -->  <section id="billing-section" class="page hidden">
+    <h2>🧾 Generate Bill</h2>
+    <form id="bill-form" class="form">
+      <div class="form-group">
+        <label for="buyer-name">Buyer Name:</label>
+        <input type="text" id="buyer-name" required>
+      </div>
+      <div class="form-group">
+        <label for="bill-item">Select Item:</label>
+        <select id="bill-item" required>
+          <option>Rice</option>
+          <option>Sugar</option>
+          <option>Dal</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="bill-quantity">Quantity (Kg):</label>
+        <input type="number" id="bill-quantity" min="1" value="1" required>
+      </div>
+      <button type="submit" class="btn-primary"><i class="fas fa-file-invoice-dollar"></i> Generate Bill</button>
+    </form><!-- Bill Output -->
+<div id="bill-output" class="bill-card">
+  <h3><i class="fas fa-scroll"></i> Bill Preview</h3>
+  <p>No bill generated yet.</p>
+</div>
+
+  </section>  <!-- ================= BUYER RECORDS ================= -->  <section id="records-section" class="page hidden">
+    <h2>📑 Buyer Records</h2>
+    <div class="search-box">
+      <input type="text" id="search-buyer" placeholder="Enter buyer name">
+      <button id="search-btn" class="btn-primary"><i class="fas fa-search"></i> Search</button>
+    </div>
+    <div id="records-output" class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Buyer</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Total (₹)</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="records-table">
+          <tr><td>Ramesh</td><td>Rice</td><td>9</td><td>₹540</td><td>01-09-2025</td></tr>
+          <tr><td>Sita</td><td>Sugar</td><td>5</td><td>₹225</td><td>02-09-2025</td></tr>
+          <tr><td>Arjun</td><td>Dal</td><td>2</td><td>₹160</td><td>03-09-2025</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>  <!-- ================= ABOUT ================= -->  <section id="about-section" class="page hidden">
+    <h2>ℹ️ About Keeranna Store</h2>
+    <p>Keeranna Store is your one-stop shop for all groceries. We deliver fresh and affordable items daily to our customers. Built with modern tech to make billing and record keeping easier!</p>
+  </section>  <!-- ================= CONTACT ================= -->  <section id="contact-section" class="page hidden">
+    <h2>📞 Contact Us</h2>
+    <form id="contact-form" class="form">
+      <div class="form-group">
+        <label for="contact-name">Name:</label>
+        <input type="text" id="contact-name" required>
+      </div>
+      <div class="form-group">
+        <label for="contact-email">Email:</label>
+        <input type="email" id="contact-email" required>
+      </div>
+      <div class="form-group">
+        <label for="contact-message">Message:</label>
+        <textarea id="contact-message" rows="4"></textarea>
+      </div>
+      <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Send</button>
+    </form>
+  </section>  <!-- ================= FAQ ================= -->  <section id="faq-section" class="page hidden">
+    <h2>❓ Frequently Asked Questions</h2>
+    <article class="faq">
+      <h3>How do I add items?</h3>
+      <p>Go to the Admin Panel and fill in item name and price per kg.</p>
+    </article>
+    <article class="faq">
+      <h3>Can I search past buyers?</h3>
+      <p>Yes, go to Records section and use the search bar.</p>
+    </article>
+    <article class="faq">
+      <h3>Can I print bills?</h3>
+      <p>Bills can be generated and later enhanced with print/download options.</p>
+    </article>
+  </section>  <!-- ================= FOOTER ================= -->  <footer id="footer">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h4>About</h4>
+        <p>Keeranna Store - making grocery shopping smart and digital for everyone.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#admin-panel">Admin</a></li>
+          <li><a href="#billing-section">Billing</a></li>
+          <li><a href="#records-section">Records</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <p><i class="fab fa-facebook"></i> Facebook</p>
+        <p><i class="fab fa-twitter"></i> Twitter</p>
+        <p><i class="fab fa-instagram"></i> Instagram</p>
+      </div>
+    </div>
+    <p>© 2025 Keeranna Store. Crafted with <i class="fas fa-heart"></i> for small businesses.</p>
+  </footer>  <!-- ================= MODALS ================= -->  <div id="modal-overlay" class="hidden">
+    <div class="modal">
+      <h3 id="modal-title">Modal Title</h3>
+      <div id="modal-content">
+        <p>Dynamic modal content.</p>
+      </div>
+      <button id="close-modal" class="btn-secondary">Close</button>
+    </div>
+  </div>  <script src="script.js"></script></body>
+                                   </html>
